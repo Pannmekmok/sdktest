@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   lpcmr_nextjs:
     container_name: lpcmr_nextjs
