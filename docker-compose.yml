@@ -1,0 +1,42 @@
+services:
+  lpcmr_nextjs:
+    container_name: lpcmr_nextjs
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: pannm/sdktest:web2.0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./configs:/lpcmr/configs
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  lpcmr_sdk:
+    container_name: lpcmr_sdk
+    build:
+      context: .
+      dockerfile: Dockerfile.sdk
+    image: pannm/sdktest:sdk2.0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    ports:
+      - "3456:3456"
+    volumes:
+      - ./configs:/lpcmr/configs
+      - ./outputs:/lpcmr/outputs
+      - ./logs:/lpcmr/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - lpcmr_nextjs
+    stdin_open: true
+    tty: true
+    restart: always
