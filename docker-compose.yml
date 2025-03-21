@@ -2,11 +2,7 @@ services:
   lpcmr_nextjs:
     container_name: lpcmr_nextjs
     image: pannm/sdktest:web2.0
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
+    runtime: nvidia
 
     ports:
       - "3000:3000"
@@ -17,11 +13,7 @@ services:
   lpcmr_sdk:
     container_name: lpcmr_sdk
     image: pannm/sdktest:sdk2.0
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
+    runtime: nvidia
     ports:
       - "3456:3456"
     volumes:
