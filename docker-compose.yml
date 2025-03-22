@@ -5,11 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile.web
     image: pannm/sdktest:web2.0
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
+    runtime: nvidia
 
     ports:
       - "3000:3000"
@@ -23,11 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile.sdk
     image: pannm/sdktest:sdk2.0
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
+    runtime: nvidia
     ports:
       - "3456:3456"
     volumes:
